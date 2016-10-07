@@ -782,71 +782,45 @@ hljs.initHighlightingOnLoad();
 
 </section>
 <section data-transition="default" data-transition-speed="default">
-<h3>The UI Code</h3>
-<div class="slideContent" >
-<p>ui.R
-<small></p>
-
-<pre><code class="r">shinyUI(
- pageWithSidebar( headerPanel(&quot;Calculate your Body Mass Index (BMI)&quot;),
-   sidebarPanel(
-    numericInput(&#39;weight&#39;, &#39;Insert your weight in Pounds&#39;, 160, step = 1),
-    numericInput(&#39;height&#39;, &#39;Insert your height in Inches&#39;, 70, step = 0.1), submitButton(&#39;Submit&#39;)
-    ), 
-  mainPanel(
-    p(&#39;The BMI provides a simple numeric measure of a person\&#39;s thickness or thinness, allowing health professionals to discuss weight problems more objectively with their patients.\n&#39;),
-    h4(&#39;Your Values:&#39;), p(&#39;weight:&#39;), verbatimTextOutput(&quot;inputweightvalue&quot;),
-    p(&#39;height:&#39;), verbatimTextOutput(&quot;inputheightvalue&quot;), h4(&#39;Your BMI:&#39;), verbatimTextOutput(&quot;bmi&quot;),
-    p(&#39;It means that you are:&#39;),strong(verbatimTextOutput(&quot;diagnostic&quot;)) ) 
-  )
-)    
-</code></pre>
-
-<p></small></p>
-
-</div>
-
-</section>
-<section data-transition="default" data-transition-speed="default">
-<h3>The Server Code</h3>
-<div class="slideContent" >
-<p>server.R
-<small></p>
-
-<pre><code class="r">library(shiny) 
-BMI &lt;- function(weight,height) {weight/(height^2)*703}
-diagnosticf &lt;- function(weight,height){
-  BMI_value &lt;- (weight/(height^2))*703
-  ifelse(BMI_value&lt;18.5,&quot;Underweight&quot;,ifelse(BMI_value&lt;25,&quot;Healthy Weight&quot;,ifelse(BMI_value&lt;30,&quot;Overweight&quot;)))
-}
-shinyServer(
-    function(input, output) {    
-        output$inputweightvalue &lt;- renderPrint({input$weight})
-        output$inputheightvalue &lt;- renderPrint({input$height})
-        output$bmi &lt;- renderPrint({BMI(input$weight,input$height)})
-        output$diagnostic &lt;- renderPrint({diagnosticf(input$weight,input$height)})
-        } 
-)
-</code></pre>
-
-<p></small></p>
-
-</div>
-
-</section>
-<section data-transition="default" data-transition-speed="default">
-<h3>The Magic</h3>
+<h3>Secret Sauce: How do we get the BMI</h3>
 <div class="slideContent" >
 <p>Calculating the BMI is as simple as dividing the weight by the squared height and multipliying the result by 703:</p>
 
-<pre><code class="r">BMI &lt;- function(weight,height) {weight/(height^2)*703}
+<pre><code class="r">bmi &lt;- (weight/(height^2))*703
 </code></pre>
 
-<p><br></p>
+<p>Example:</p>
 
-<h3> Conclusion </h3>
+<pre><code class="r">weight = 160
+height = 60
+bmi &lt;- (weight/(height^2))*703
+bmi
+</code></pre>
 
-<p>A very simple App available for everyone at </p>
+<pre><code>[1] 31.24444
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="default">
+<h3>Category</h3>
+<div class="slideContent" >
+<p>We can then class the result into one of the three category. Taking the input from the previous slide:</p>
+
+<pre><code class="r">ifelse(bmi &lt; 18.5, &quot;Underweight&quot;, ifelse(bmi &lt; 25,&quot;Healthy Weight&quot;, ifelse(bmi &lt; 60,&quot;Overweight&quot;)))
+</code></pre>
+
+<pre><code>[1] &quot;Overweight&quot;
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="default">
+<h3>Conclusion</h3>
+<div class="slideContent" >
+<p>A very simple App available for everyone to use at </p>
 
 <p><a href="https://leosum.shinyapps.io/Developing-Data-Product-Project/">https://leosum.shinyapps.io/Developing-Data-Product-Project/</a></p>
 

@@ -1,7 +1,8 @@
 # Developing-Data-Product-Project
-In this repository you can find the code of the Developing Data Products Project assignment and a presentation
-ui.R
-server.R
+In this repository you can find the code of the Developing Data Products Project assignment and a presentation:
+- ui.R
+- server.R
+- bmi.Rpres
 
 The Shiny application developed is a Body Mass Index Calculator. Insert your weight, your height and click submit. 
 It will return your BMI and your Weight Category.

@@ -6,7 +6,7 @@ diagnosticf <- function(weight,height){
 
         BMI_value <- (weight/(height^2))*703
 
-        ifelse(BMI_value<18.5,"Underweight",ifelse(BMI_value<25,"Healthy Weight",ifelse(BMI_value<30,"Overweight")))
+        ifelse(BMI_value<18.5,"Underweight",ifelse(BMI_value<25,"Healthy Weight",ifelse(BMI_value<60,"Overweight")))
 
 }
 
